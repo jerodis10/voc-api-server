@@ -1,0 +1,5 @@
+rootProject.name = 'voc'
+include 'voc-api'
+include 'voc-core'
+include 'voc-common'
+

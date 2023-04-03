@@ -1,0 +1,21 @@
+spring:
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:testDB
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/testDB2
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+#      ddl-auto: update
+      ddl-auto: create
+      properties:
+        hibernate:
+          default_batch_fetch_size: 1000
+          open-in-view: false
+
+
