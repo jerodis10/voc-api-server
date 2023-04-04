@@ -1,6 +1,7 @@
 package com.jerodis.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +23,10 @@ public class Voc {
     private String party;
 
     private String content;
+
+    @Builder
+    public Voc(String party, String content) {
+        this.party = party;
+        this.content = content;
+    }
 }
