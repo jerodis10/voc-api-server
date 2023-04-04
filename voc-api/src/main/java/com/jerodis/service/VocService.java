@@ -22,26 +22,38 @@ public class VocService {
 
     @Transactional
     public void vocSave(VocForm vocForm) {
-        Voc voc = Voc.builder()
-                .vocNo(vocForm.getVocNo())
-                .party(vocForm.getParty())
-                .content(vocForm.getContent())
-                .build();
+        try {
+            Voc voc = Voc.builder()
+                    .vocNo(vocForm.getVocNo())
+                    .party(vocForm.getParty())
+                    .content(vocForm.getContent())
+                    .build();
 
-        vocRepository.save(voc);
+            vocRepository.save(voc);
+        } catch (Exception exception) {
+            throw new IllegalStateException("VOC 저장 에러");
+        }
     }
 
     @Transactional(readOnly = true)
     public List<VocResponse> vocFindAll() {
-        List<VocDto> vocList = vocRepository.findAll();
+        try {
+            List<VocDto> vocList = vocRepository.findAll();
 
-        return vocList.stream()
-                .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount(), voc.getName()))
-                .collect(Collectors.toList());
+            return vocList.stream()
+                    .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount(), voc.getName()))
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new IllegalStateException("VOC 조회 에러");
+        }
     }
 
     @Transactional
     public void vocUpdate(VocForm vocForm) {
-        vocRepository.update(vocForm.getVocNo());
+        try {
+            vocRepository.update(vocForm.getVocNo());
+        } catch (Exception exception) {
+            throw new IllegalStateException("이의제기 저장 에러");
+        }
     }
 }

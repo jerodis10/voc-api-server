@@ -3,6 +3,7 @@ package com.jerodis.controller;
 import com.jerodis.dto.PenaltyForm;
 import com.jerodis.dto.VocForm;
 import com.jerodis.dto.VocResponse;
+import com.jerodis.service.CompensationService;
 import com.jerodis.service.VocService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 public class VocController {
 
     private final VocService vocService;
+    private final CompensationService compensationService;
 
     @PostMapping("/voc")
     public void CreateVoc(@RequestBody VocForm vocForm) {

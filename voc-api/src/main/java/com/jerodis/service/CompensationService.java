@@ -63,7 +63,6 @@ public class CompensationService {
 
             compensationRepository.penaltySave(penalty);
         } catch (Exception exception) {
-//            ReviewExceptionHandler.handleException(exception);
             throw new IllegalStateException("패널티 저장 오류");
         }
     }
@@ -73,12 +72,6 @@ public class CompensationService {
         try {
             Penalty findPenalty = compensationRepository.findOne(vocNo)
                                 .orElseThrow(() -> new NoSuchElementException("패널티가 존재하지 않습니다."));
-
-//            Penalty penalty = Penalty.builder()
-//                    .penaltyYn("Y")
-//                    .name(findPenalty.getName())
-//                    .amount(findPenalty.getAmount())
-//                    .build();
 
             compensationRepository.updatePenalty(vocNo);
         } catch (Exception exception) {
