@@ -18,19 +18,30 @@ public class Penalty {
     private Long id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private Long amount;
+
+    private String penaltyYn;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "voc_no")
     private Voc voc;
 
     @Builder
-    public Penalty(Long amount) {
+    public Penalty(String name, Long amount, String penaltyYn) {
+        this.name = name;
         this.amount = amount;
+        this.penaltyYn = penaltyYn;
     }
 
     public void setVoc(Voc voc) {
         this.voc = voc;
         voc.penalties.add(this);
+    }
+
+    public void changePenalty() {
+        this.penaltyYn = "Y";
     }
 }

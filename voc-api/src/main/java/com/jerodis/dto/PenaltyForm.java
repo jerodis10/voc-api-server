@@ -11,11 +11,14 @@ import javax.validation.constraints.NotNull;
 public class PenaltyForm {
 
     @NotNull
-    @JsonProperty("p_voc_no")
+    @JsonProperty("voc_no")
     private String vocNo;
 
     @NotNull
-    @JsonProperty("p_amount")
+    private String name;
+
+    @NotNull
+    @JsonProperty("amount")
     private Long amount;
 
 }

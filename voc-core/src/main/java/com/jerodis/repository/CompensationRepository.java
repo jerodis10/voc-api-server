@@ -5,6 +5,7 @@ import com.jerodis.domain.Penalty;
 import com.jerodis.dto.CompensationDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CompensationRepository {
 
@@ -13,5 +14,9 @@ public interface CompensationRepository {
     List<CompensationDto> findAll();
 
     void penaltySave(Penalty penalty);
+
+    Optional<Penalty> findOne(String vocNo);
+
+    void updatePenalty(String vocNo);
 
 }

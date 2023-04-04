@@ -35,7 +35,7 @@ public class CompensationService {
             compensationRepository.save(compensation);
         } catch (Exception exception) {
 //            ReviewExceptionHandler.handleException(exception);
-            throw exception;
+            throw new IllegalStateException("VOC 저장 오류");
         }
     }
 
@@ -52,6 +52,8 @@ public class CompensationService {
     public void penaltySave(PenaltyForm penaltyForm) {
         try {
             Penalty penalty = Penalty.builder()
+                    .penaltyYn("N")
+                    .name(penaltyForm.getName())
                     .amount(penaltyForm.getAmount())
                     .build();
 
@@ -62,7 +64,25 @@ public class CompensationService {
             compensationRepository.penaltySave(penalty);
         } catch (Exception exception) {
 //            ReviewExceptionHandler.handleException(exception);
-            throw exception;
+            throw new IllegalStateException("패널티 저장 오류");
+        }
+    }
+
+    @Transactional
+    public void penaltyUpdate(String vocNo) {
+        try {
+            Penalty findPenalty = compensationRepository.findOne(vocNo)
+                                .orElseThrow(() -> new NoSuchElementException("패널티가 존재하지 않습니다."));
+
+//            Penalty penalty = Penalty.builder()
+//                    .penaltyYn("Y")
+//                    .name(findPenalty.getName())
+//                    .amount(findPenalty.getAmount())
+//                    .build();
+
+            compensationRepository.updatePenalty(vocNo);
+        } catch (Exception exception) {
+            throw new IllegalStateException("패널티 등록 여부 저장 오류");
         }
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.jerodis.domain.QCompensation.compensation;
+import static com.jerodis.domain.QPenalty.penalty;
 import static com.jerodis.domain.QVoc.voc;
 
 @Repository
@@ -36,9 +37,12 @@ public class JpaVocRepository implements VocRepository{
                         voc.vocNo,
                         voc.party,
                         voc.content,
-                        compensation.amount))
+                        compensation.amount,
+                        penalty.name
+                ))
                 .from(compensation)
                 .leftJoin(compensation.voc, voc)
+                .leftJoin(voc.penalties, penalty)
                 .fetch();
     }
 
@@ -49,4 +53,5 @@ public class JpaVocRepository implements VocRepository{
                 .where(voc.vocNo.eq(vocNo))
                 .fetchOne());
     }
+
 }

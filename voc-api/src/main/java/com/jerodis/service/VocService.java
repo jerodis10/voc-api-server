@@ -36,7 +36,7 @@ public class VocService {
         List<VocDto> vocList = vocRepository.findAll();
 
         return vocList.stream()
-                .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount()))
+                .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount(), voc.getName()))
                 .collect(Collectors.toList());
     }
 

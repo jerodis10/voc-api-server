@@ -9,8 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 import static com.jerodis.domain.QCompensation.compensation;
+import static com.jerodis.domain.QPenalty.penalty;
+import static com.jerodis.domain.QVoc.voc;
 
 @Repository
 public class JpaCompensationRepository implements CompensationRepository {
@@ -40,5 +43,23 @@ public class JpaCompensationRepository implements CompensationRepository {
     @Override
     public void penaltySave(Penalty penalty) {
         em.persist(penalty);
+    }
+
+    @Override
+    public Optional<Penalty> findOne(String vocNo) {
+        return Optional.ofNullable(queryFactory
+                .selectFrom(penalty)
+                .join(penalty.voc, voc).on(voc.vocNo.eq(vocNo))
+                .fetchOne());
+    }
+
+    @Override
+    public void updatePenalty(String vocNo) {
+        Penalty findPenalty = queryFactory
+                .selectFrom(penalty)
+                .join(penalty.voc, voc).on(voc.vocNo.eq(vocNo))
+                .fetchOne();
+
+        findPenalty.changePenalty();
     }
 }

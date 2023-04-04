@@ -1,5 +1,6 @@
 package com.jerodis.dto;
 
+import com.jerodis.util.PartyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,16 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VocResponse {
 
-    private String party;
+    private PartyType party;
 
     private String content;
 
     private Long amount;
 
-//    @Builder
-//    public VocResponse(String party, String content) {
-//        this.party = party;
-//        this.content = content;
-//    }
+    private String name;
+
 
 }

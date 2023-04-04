@@ -13,4 +13,5 @@ public interface VocRepository {
     List<VocDto> findAll();
 
     Optional<Voc> findOne(String vocNo);
+
 }
