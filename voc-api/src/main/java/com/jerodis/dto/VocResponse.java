@@ -1,22 +1,22 @@
 package com.jerodis.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VocDto {
+public class VocResponse {
 
     private String party;
 
     private String content;
 
 //    @Builder
-//    public VocDto(String party, String content) {
+//    public VocResponse(String party, String content) {
 //        this.party = party;
 //        this.content = content;
 //    }
+
 }

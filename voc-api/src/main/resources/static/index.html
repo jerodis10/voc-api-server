@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org">
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<html lagn="ko"-->
-<!--      xmlns:th="http://www.thymeleaf.org"-->
-<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
   <head>
     <meta charset="UTF-8">
     <title>VOC</title>
   </head>
   <body>
-  <h2>VOC 등록</h2>
-<!--  <form th:action="@{/voc}" th:object="${vocDto}" method="post">-->
-<!--      <div>-->
-<!--        <label th:for="party">귀책 당사자</label>-->
-<!--        <input type="text" th:field="*{party}" class="form-control"/>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <label th:for="content">귀책 내용</label>-->
-<!--        <input type="text" th:field="*{content}" class="form-control"/>-->
-<!--      </div>-->
-<!--      <div class="col">-->
-<!--        <button type="submit">등록</button>-->
-<!--      </div>-->
-<!--    </form>-->
+  <div>
+      <h2>VOC 등록</h2>
           <label th:for="party">귀책 당사자</label>
           <input type="text" id="party" class="form-control"/>
           <label th:for="content">귀책 당사자</label>
           <input type="text" id="content" class="form-control"/>
           <button type="submit" id="btn_voc">등록</button>
+  </div>
+  <div>
+      <h2>배상 등록</h2>
+      <label th:for="amount">배상 금액</label>
+      <input type="text" id="amount" class="form-control"/>
+      <button type="submit" id="btn_compen">등록</button>
+  </div>
+
   </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
