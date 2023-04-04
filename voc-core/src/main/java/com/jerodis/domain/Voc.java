@@ -29,6 +29,8 @@ public class Voc {
     @Column(nullable = false)
     private String content;
 
+    private String issueYn;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "voc")
     List<Compensation> compensations = new ArrayList<>();
 
@@ -40,6 +42,10 @@ public class Voc {
         this.vocNo = vocNo;
         this.party = party;
         this.content = content;
+    }
+
+    public void changeVoc() {
+        this.issueYn = "Y";
     }
 
 }

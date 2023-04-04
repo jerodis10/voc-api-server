@@ -54,4 +54,14 @@ public class JpaVocRepository implements VocRepository{
                 .fetchOne());
     }
 
+    @Override
+    public void update(String vocNo) {
+        Voc findVoc = queryFactory
+                .selectFrom(voc)
+                .where(voc.vocNo.eq(vocNo))
+                .fetchOne();
+
+        findVoc.changeVoc();
+    }
+
 }

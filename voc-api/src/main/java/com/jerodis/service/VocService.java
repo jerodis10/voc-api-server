@@ -40,4 +40,8 @@ public class VocService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void vocUpdate(VocForm vocForm) {
+        vocRepository.update(vocForm.getVocNo());
+    }
 }

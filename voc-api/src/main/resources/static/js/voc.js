@@ -82,3 +82,23 @@ $("button[id=btn_pen_yn]").click(function(){
         }
     });
 });
+
+$("button[id=btn_issue_yn]").click(function(){
+    const params = {
+        voc_no: document.getElementById('i_voc_no').value
+    };
+
+    $.ajax({
+        url:'/voc',
+        type:'PATCH',
+        dataType: 'json',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify(params),
+        success:function(data){
+            console.log(data);
+        },
+        error : function(e){
+            console.log(e);
+        }
+    });
+});

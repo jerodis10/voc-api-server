@@ -14,4 +14,6 @@ public interface VocRepository {
 
     Optional<Voc> findOne(String vocNo);
 
+    void update(String vocNo);
+
 }

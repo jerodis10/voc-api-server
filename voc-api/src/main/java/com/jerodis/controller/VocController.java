@@ -25,4 +25,9 @@ public class VocController {
         return vocService.vocFindAll();
     }
 
+    @PatchMapping("/voc")
+    public void UpdateVoc(@RequestBody VocForm vocForm) {
+        vocService.vocUpdate(vocForm);
+    }
+
 }
