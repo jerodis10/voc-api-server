@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
+import static com.jerodis.domain.QCompensation.compensation;
 import static com.jerodis.domain.QVoc.voc;
 
 @Repository
@@ -31,9 +33,20 @@ public class JpaVocRepository implements VocRepository{
     public List<VocDto> findAll() {
         return queryFactory
                 .select(Projections.fields(VocDto.class,
+                        voc.vocNo,
                         voc.party,
-                        voc.content))
-                .from(voc)
+                        voc.content,
+                        compensation.amount))
+                .from(compensation)
+                .leftJoin(compensation.voc, voc)
                 .fetch();
+    }
+
+    @Override
+    public Optional<Voc> findOne(String vocNo) {
+        return Optional.ofNullable(queryFactory
+                .selectFrom(voc)
+                .where(voc.vocNo.eq(vocNo))
+                .fetchOne());
     }
 }

@@ -8,13 +8,14 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-public class CompensationForm {
+public class PenaltyForm {
 
     @NotNull
-    @JsonProperty("c_voc_no")
+    @JsonProperty("p_voc_no")
     private String vocNo;
 
     @NotNull
+    @JsonProperty("p_amount")
     private Long amount;
 
 }

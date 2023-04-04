@@ -1,6 +1,7 @@
 package com.jerodis.repository;
 
 import com.jerodis.domain.Compensation;
+import com.jerodis.domain.Penalty;
 import com.jerodis.dto.CompensationDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -34,5 +35,10 @@ public class JpaCompensationRepository implements CompensationRepository {
                         compensation.amount))
                 .from(compensation)
                 .fetch();
+    }
+
+    @Override
+    public void penaltySave(Penalty penalty) {
+        em.persist(penalty);
     }
 }

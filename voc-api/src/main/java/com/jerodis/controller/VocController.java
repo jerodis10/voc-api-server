@@ -1,5 +1,6 @@
 package com.jerodis.controller;
 
+import com.jerodis.dto.PenaltyForm;
 import com.jerodis.dto.VocForm;
 import com.jerodis.dto.VocResponse;
 import com.jerodis.service.VocService;
@@ -26,4 +27,5 @@ public class VocController {
     public List<VocResponse> FindVoc() {
         return vocService.vocFindAll();
     }
+
 }

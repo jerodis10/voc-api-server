@@ -1,6 +1,8 @@
 package com.jerodis.service;
 
+import com.jerodis.domain.Penalty;
 import com.jerodis.domain.Voc;
+import com.jerodis.dto.PenaltyForm;
 import com.jerodis.dto.VocDto;
 import com.jerodis.dto.VocForm;
 import com.jerodis.dto.VocResponse;
@@ -21,6 +23,7 @@ public class VocService {
     @Transactional
     public void vocSave(VocForm vocForm) {
         Voc voc = Voc.builder()
+                .vocNo(vocForm.getVocNo())
                 .party(vocForm.getParty())
                 .content(vocForm.getContent())
                 .build();
@@ -33,7 +36,8 @@ public class VocService {
         List<VocDto> vocList = vocRepository.findAll();
 
         return vocList.stream()
-                .map(voc -> new VocResponse(voc.getParty(), voc.getContent()))
+                .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount()))
                 .collect(Collectors.toList());
     }
+
 }

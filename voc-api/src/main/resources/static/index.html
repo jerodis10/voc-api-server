@@ -8,17 +8,29 @@
   <body>
   <div>
       <h2>VOC 등록</h2>
+          <label th:for="voc_no">voc no</label>
+          <input type="text" id="voc_no" class="form-control"/>
           <label th:for="party">귀책 당사자</label>
           <input type="text" id="party" class="form-control"/>
-          <label th:for="content">귀책 당사자</label>
+          <label th:for="content">귀책 내용</label>
           <input type="text" id="content" class="form-control"/>
           <button type="submit" id="btn_voc">등록</button>
   </div>
   <div>
       <h2>배상 등록</h2>
+      <label th:for="c_voc_no">voc no</label>
+      <input type="text" id="c_voc_no" class="form-control"/>
       <label th:for="amount">배상 금액</label>
       <input type="text" id="amount" class="form-control"/>
       <button type="submit" id="btn_compen">등록</button>
+  </div>
+  <div>
+      <h2>패널티 등록</h2>
+      <label th:for="p_voc_no">voc no</label>
+      <input type="text" id="p_voc_no" class="form-control"/>
+      <label th:for="p_amount">배상 금액</label>
+      <input type="text" id="p_amount" class="form-control"/>
+      <button type="submit" id="btn_pen">등록</button>
   </div>
 
   </body>

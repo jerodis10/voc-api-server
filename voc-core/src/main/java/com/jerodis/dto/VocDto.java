@@ -14,6 +14,8 @@ public class VocDto {
 
     private String content;
 
+    private Long amount;
+
 //    @Builder
 //    public VocDto(String party, String content) {
 //        this.party = party;

@@ -2,6 +2,7 @@ package com.jerodis.controller;
 
 import com.jerodis.dto.CompensationForm;
 import com.jerodis.dto.CompensationResponse;
+import com.jerodis.dto.PenaltyForm;
 import com.jerodis.service.CompensationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,10 @@ public class CompensationController {
     @GetMapping("/comp")
     public List<CompensationResponse> FindVoc() {
         return compensationService.compensationFindAll();
+    }
+
+    @PostMapping("/pen")
+    public void CreatePenalty(@RequestBody PenaltyForm penaltyForm) {
+        compensationService.penaltySave(penaltyForm);
     }
 }

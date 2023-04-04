@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Compensation {
+public class Penalty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "compensation_id")
+    @Column(name = "penalty_id")
     private Long id;
 
     @Column(nullable = false)
@@ -24,15 +24,13 @@ public class Compensation {
     @JoinColumn(name = "voc_no")
     private Voc voc;
 
-
     @Builder
-    public Compensation(Long amount) {
+    public Penalty(Long amount) {
         this.amount = amount;
     }
 
     public void setVoc(Voc voc) {
         this.voc = voc;
-        voc.compensations.add(this);
+        voc.penalties.add(this);
     }
-
 }

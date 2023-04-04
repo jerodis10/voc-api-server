@@ -13,6 +13,8 @@ public class VocResponse {
 
     private String content;
 
+    private Long amount;
+
 //    @Builder
 //    public VocResponse(String party, String content) {
 //        this.party = party;
