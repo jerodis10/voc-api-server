@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -18,6 +19,7 @@ public class PenaltyForm {
     private String name;
 
     @NotNull
+    @Min(0)
     @JsonProperty("amount")
     private Long amount;
 

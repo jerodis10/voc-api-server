@@ -13,7 +13,8 @@ public enum CommonErrorCode implements ErrorCode {
     WRONG_ARGUMENT(HttpStatus.BAD_REQUEST, "전달받은 매개변수가 올바르지 않습니다."),
     ALREADY_PERSIST(HttpStatus.BAD_REQUEST, "이미 등록되었습니다."),
     NOT_PERSIST(HttpStatus.BAD_REQUEST, "등록되어있지 않습니다."),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
+    NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 URL 입니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

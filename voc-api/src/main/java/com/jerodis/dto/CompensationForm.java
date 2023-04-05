@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -11,10 +12,11 @@ import javax.validation.constraints.NotNull;
 public class CompensationForm {
 
     @NotNull
-    @JsonProperty("c_voc_no")
+    @JsonProperty("voc_no")
     private String vocNo;
 
     @NotNull
+    @Min(0)
     private Long amount;
 
 }

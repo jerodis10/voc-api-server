@@ -1,10 +1,12 @@
 package com.jerodis.domain;
 
+import com.jerodis.util.ExistType;
 import com.jerodis.util.PartyType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@DynamicUpdate
 public class Voc {
 
     @Id
@@ -45,7 +48,7 @@ public class Voc {
     }
 
     public void changeVoc() {
-        this.issueYn = "Y";
+        this.issueYn = ExistType.YES.getType();
     }
 
 }

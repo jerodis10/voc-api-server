@@ -8,6 +8,7 @@ import com.jerodis.service.VocService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,18 +18,18 @@ public class VocController {
     private final VocService vocService;
     private final CompensationService compensationService;
 
-    @PostMapping("/voc")
-    public void CreateVoc(@RequestBody VocForm vocForm) {
-        vocService.vocSave(vocForm);
-    }
-
     @GetMapping("/voc")
     public List<VocResponse> FindVoc() {
         return vocService.vocFindAll();
     }
 
+    @PostMapping("/voc")
+    public void CreateVoc(@Valid  @RequestBody VocForm vocForm) {
+        vocService.vocSave(vocForm);
+    }
+
     @PatchMapping("/voc")
-    public void UpdateVoc(@RequestBody VocForm vocForm) {
+    public void UpdateVoc(@Valid @RequestBody VocForm vocForm) {
         vocService.vocUpdate(vocForm);
     }
 

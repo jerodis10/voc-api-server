@@ -1,15 +1,18 @@
 package com.jerodis.domain;
 
+import com.jerodis.util.ExistType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@DynamicUpdate
 public class Penalty {
 
     @Id
@@ -42,6 +45,6 @@ public class Penalty {
     }
 
     public void changePenalty() {
-        this.penaltyYn = "Y";
+        this.penaltyYn = ExistType.YES.getType();
     }
 }

@@ -18,5 +18,4 @@ public class VocResponse {
 
     private String name;
 
-
 }

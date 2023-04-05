@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Slf4j
@@ -28,6 +29,15 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
         ErrorCode errorCode = CommonErrorCode.WRONG_ARGUMENT;
         return handleExceptionInternal(errorCode, e.getMessage());
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<Object> noHandlerFoundException(NoHandlerFoundException e) {
+        log.error("noHandlerFoundException : {}", e.getMessage());
+
+        ErrorCode errorCode = CommonErrorCode.NOT_FOUND;
+        String message = "존재하지 않는 URL 입니다. : " +  e.getRequestURL();
+        return handleExceptionInternal(errorCode, message);
     }
 
     @Override

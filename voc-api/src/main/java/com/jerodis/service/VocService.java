@@ -8,14 +8,17 @@ import com.jerodis.dto.VocForm;
 import com.jerodis.dto.VocResponse;
 import com.jerodis.repository.VocRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class VocService {
 
     private final VocRepository vocRepository;
@@ -29,9 +32,13 @@ public class VocService {
                     .content(vocForm.getContent())
                     .build();
 
+            vocRepository.findOne(vocForm.getVocNo())
+                    .ifPresent(v -> { throw new RuntimeException("해당 VOC 가 이미 존재합니다."); });
+
             vocRepository.save(voc);
-        } catch (Exception exception) {
-            throw new IllegalStateException("VOC 저장 에러");
+        } catch (Exception e) {
+            log.error("[VOC 저장] Exception: {}", e);
+            throw new RuntimeException("VOC 저장 에러", e);
         }
     }
 
@@ -43,17 +50,22 @@ public class VocService {
             return vocList.stream()
                     .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount(), voc.getName()))
                     .collect(Collectors.toList());
-        } catch (Exception exception) {
-            throw new IllegalStateException("VOC 조회 에러");
+        } catch (Exception e) {
+            log.error("[VOC 조회] Exception: {}", e);
+            throw new RuntimeException("VOC 조회 에러", e);
         }
     }
 
     @Transactional
     public void vocUpdate(VocForm vocForm) {
         try {
+            vocRepository.findOne(vocForm.getVocNo())
+                    .orElseThrow(() -> new NoSuchElementException("VOC 가 존재하지 않습니다."));
+
             vocRepository.update(vocForm.getVocNo());
-        } catch (Exception exception) {
-            throw new IllegalStateException("이의제기 저장 에러");
+        } catch (Exception e) {
+            log.error("[이의제기 저장] Exception: {}", e);
+            throw new RuntimeException("이의제기 저장 에러", e);
         }
     }
 }
