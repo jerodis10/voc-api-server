@@ -1,12 +1,8 @@
 package com.jerodis.exception;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+public class VocException extends CommonException {
 
-@RequiredArgsConstructor
-@Getter
-public class VocException extends RuntimeException {
-
-    private final ErrorCode errorCode;
-
+    public VocException(VocExceptionStatus vocExceptionStatus) {
+        super(vocExceptionStatus.getMessage(), vocExceptionStatus.getStatusCode());
+    }
 }

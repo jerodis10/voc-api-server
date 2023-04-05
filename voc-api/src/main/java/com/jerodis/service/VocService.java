@@ -6,6 +6,8 @@ import com.jerodis.dto.PenaltyForm;
 import com.jerodis.dto.VocDto;
 import com.jerodis.dto.VocForm;
 import com.jerodis.dto.VocResponse;
+import com.jerodis.exception.VocException;
+import com.jerodis.exception.VocExceptionStatus;
 import com.jerodis.repository.VocRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +35,15 @@ public class VocService {
                     .build();
 
             vocRepository.findOne(vocForm.getVocNo())
-                    .ifPresent(v -> { throw new IllegalStateException("해당 VOC 가 이미 존재합니다."); });
+                    .ifPresent(v -> { throw new VocException(VocExceptionStatus.DUPLICATION_VOC); });
 
             vocRepository.save(voc);
-        } catch (Exception e) {
+
+        } catch (VocException e) {
             log.error("[VOC 저장] Exception: {}", e.getMessage());
-            throw new IllegalStateException("VOC 저장 에러", e);
+            throw new VocException(VocExceptionStatus.DUPLICATION_VOC);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 

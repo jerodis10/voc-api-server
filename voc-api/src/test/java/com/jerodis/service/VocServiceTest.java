@@ -47,7 +47,7 @@ class VocServiceTest {
     void vocSaveDuplicate() {
         // given
         Voc voc = Voc.builder()
-                .vocNo("aa4")
+                .vocNo(vocNo)
                 .party(PartyType.CARRIER)
                 .content("1")
                 .build();
