@@ -1,10 +1,7 @@
 package com.jerodis.controller;
 
 import com.jerodis.dto.CompensationResponse;
-import com.jerodis.dto.VocResponse;
 import com.jerodis.service.CompensationService;
-import com.jerodis.service.VocService;
-import com.jerodis.util.PartyType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

@@ -37,13 +37,12 @@ public class CompensationService {
             compensation.setVoc(voc);
 
             compensationRepository.findOne(compensationForm.getVocNo())
-                    .ifPresent(v -> { throw new RuntimeException("해당 보상 정보가 이미 존재합니다."); });
+                    .ifPresent(v -> { throw new IllegalStateException("해당 보상 정보가 이미 존재합니다."); });
 
             compensationRepository.save(compensation);
         } catch (Exception e) {
-//            ExceptionHandler.handleException(exception);
-            log.error("[보상 정보 저장] Exception: {}", e);
-            throw new RuntimeException(e.getMessage(), e);
+            log.error("[보상 정보 저장] Exception: {}", e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         }
     }
 
@@ -56,8 +55,8 @@ public class CompensationService {
                     .map(com -> new CompensationResponse(com.getAmount()))
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("[보상 정보 조회] Exception: {}", e);
-            throw new RuntimeException("보상 정보 조회가 실패했습니다.", e);
+            log.error("[보상 정보 조회] Exception: {}", e.getMessage());
+            throw new IllegalStateException("보상 정보 조회가 실패했습니다.", e);
         }
     }
 
@@ -77,21 +76,21 @@ public class CompensationService {
 
             compensationRepository.penaltySave(penalty);
         } catch (Exception e) {
-            log.error("[패널티 저장] Exception: {}", e);
-            throw new RuntimeException(e.getMessage(), e);
+            log.error("[패널티 저장] Exception: {}", e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         }
     }
 
     @Transactional
     public void penaltyUpdate(String vocNo) {
         try {
-            Penalty findPenalty = compensationRepository.findOne(vocNo)
-                        .orElseThrow(() -> new NoSuchElementException("[패널티 등록 여부 저장 오류] 패널티가 존재하지 않습니다."));
+            compensationRepository.findOne(vocNo)
+                        .orElseThrow(() -> new NoSuchElementException("[패널티 등록 여부 저장 오류] 보상이 존재하지 않습니다."));
 
             compensationRepository.updatePenalty(vocNo);
         } catch (Exception e) {
-            log.error("[패널티 등록 여부 저장] Exception: {}", e);
-            throw new RuntimeException(e.getMessage(), e);
+            log.error("[패널티 등록 여부 저장] Exception: {}", e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         }
     }
 }

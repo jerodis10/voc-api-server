@@ -1,6 +1,7 @@
 package com.jerodis.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,4 +20,9 @@ public class CompensationForm {
     @Min(0)
     private Long amount;
 
+    @Builder
+    public CompensationForm(String vocNo, Long amount) {
+        this.vocNo = vocNo;
+        this.amount = amount;
+    }
 }

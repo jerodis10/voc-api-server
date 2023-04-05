@@ -1,6 +1,7 @@
 package com.jerodis.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,10 @@ public class PenaltyForm {
     @JsonProperty("amount")
     private Long amount;
 
+    @Builder
+    public PenaltyForm(String vocNo, String name, Long amount) {
+        this.vocNo = vocNo;
+        this.name = name;
+        this.amount = amount;
+    }
 }

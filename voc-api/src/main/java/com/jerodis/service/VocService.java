@@ -33,12 +33,12 @@ public class VocService {
                     .build();
 
             vocRepository.findOne(vocForm.getVocNo())
-                    .ifPresent(v -> { throw new RuntimeException("해당 VOC 가 이미 존재합니다."); });
+                    .ifPresent(v -> { throw new IllegalStateException("해당 VOC 가 이미 존재합니다."); });
 
             vocRepository.save(voc);
         } catch (Exception e) {
-            log.error("[VOC 저장] Exception: {}", e);
-            throw new RuntimeException("VOC 저장 에러", e);
+            log.error("[VOC 저장] Exception: {}", e.getMessage());
+            throw new IllegalStateException("VOC 저장 에러", e);
         }
     }
 
@@ -51,8 +51,8 @@ public class VocService {
                     .map(voc -> new VocResponse(voc.getParty(), voc.getContent(), voc.getAmount(), voc.getName()))
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("[VOC 조회] Exception: {}", e);
-            throw new RuntimeException("VOC 조회 에러", e);
+            log.error("[VOC 조회] Exception: {}", e.getMessage());
+            throw new IllegalStateException("VOC 조회 에러", e);
         }
     }
 
@@ -64,8 +64,8 @@ public class VocService {
 
             vocRepository.update(vocForm.getVocNo());
         } catch (Exception e) {
-            log.error("[이의제기 저장] Exception: {}", e);
-            throw new RuntimeException("이의제기 저장 에러", e);
+            log.error("[이의제기 저장] Exception: {}", e.getMessage());
+            throw new IllegalStateException("이의제기 저장 에러", e);
         }
     }
 }
