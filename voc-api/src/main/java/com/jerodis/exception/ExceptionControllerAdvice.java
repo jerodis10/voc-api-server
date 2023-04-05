@@ -31,14 +31,14 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(errorCode, e.getMessage());
     }
 
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<Object> noHandlerFoundException(NoHandlerFoundException e) {
-        log.error("noHandlerFoundException : {}", e.getMessage());
-
-        ErrorCode errorCode = CommonErrorCode.NOT_FOUND;
-        String message = "존재하지 않는 URL 입니다. : " +  e.getRequestURL();
-        return handleExceptionInternal(errorCode, message);
-    }
+//    @ExceptionHandler(NoHandlerFoundException.class)
+//    public ResponseEntity<Object> noHandlerFoundException(NoHandlerFoundException e) {
+//        log.error("noHandlerFoundException : {}", e.getMessage());
+//
+//        ErrorCode errorCode = CommonErrorCode.NOT_FOUND;
+//        String message = "존재하지 않는 URL 입니다. : " +  e.getRequestURL();
+//        return handleExceptionInternal(errorCode, message);
+//    }
 
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(
