@@ -1,2 +1,48 @@
 bootJar { enabled = false }
 jar { enabled = true }
+
+
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+}
+
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslDir]
+        }
+    }
+}
+
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    if(file(querydslDir).exists() )
+        delete(file(querydslDir))
+}

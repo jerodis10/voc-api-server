@@ -1,11 +1,13 @@
 package com.jerodis.domain;
 
+import com.jerodis.entity.BaseEntity;
 import com.jerodis.util.ExistType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -13,19 +15,22 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @DynamicUpdate
-public class Penalty {
+public class Penalty extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "penalty_id")
+    @Audited(withModifiedFlag = true)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
+    @Audited(withModifiedFlag = true)
     private Long amount;
 
+    @Audited(withModifiedFlag = true)
     private String penaltyYn;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -4,6 +4,8 @@ import com.jerodis.domain.Compensation;
 import com.jerodis.domain.Penalty;
 import com.jerodis.domain.Voc;
 import com.jerodis.dto.*;
+import com.jerodis.exception.VocException;
+import com.jerodis.exception.VocExceptionStatus;
 import com.jerodis.repository.CompensationRepository;
 import com.jerodis.repository.VocRepository;
 import com.jerodis.util.ExistType;
@@ -32,7 +34,7 @@ public class CompensationService {
                     .build();
 
             Voc voc = vocRepository.findOne(compensationForm.getVocNo())
-                    .orElseThrow(() -> new NoSuchElementException("VOC 가 존재하지 않습니다."));
+                    .orElseThrow(() -> new VocException(VocExceptionStatus.NO_VOC));
 
             compensation.setVoc(voc);
 
@@ -40,6 +42,9 @@ public class CompensationService {
                     .ifPresent(v -> { throw new IllegalStateException("해당 보상 정보가 이미 존재합니다."); });
 
             compensationRepository.save(compensation);
+        } catch (VocException vocException) {
+            log.error("[보상 정보 저장] VocException: {}", vocException.getMessage());
+            throw vocException;
         } catch (Exception e) {
             log.error("[보상 정보 저장] Exception: {}", e.getMessage());
             throw new IllegalStateException(e.getMessage(), e);
@@ -70,11 +75,14 @@ public class CompensationService {
                     .build();
 
             Voc voc = vocRepository.findOne(penaltyForm.getVocNo())
-                        .orElseThrow(() -> new NoSuchElementException("[패널티 저장 오류] VOC 가 존재하지 않습니다."));
+                    .orElseThrow(() -> new VocException(VocExceptionStatus.NO_VOC));
 
             penalty.setVoc(voc);
 
             compensationRepository.penaltySave(penalty);
+        } catch (VocException vocException) {
+            log.error("[패널티 저장] VocException: {}", vocException.getMessage());
+            throw vocException;
         } catch (Exception e) {
             log.error("[패널티 저장] Exception: {}", e.getMessage());
             throw new IllegalStateException(e.getMessage(), e);

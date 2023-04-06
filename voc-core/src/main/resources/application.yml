@@ -1,26 +1,17 @@
 spring:
-#  h2:
-#    console:
-#      enabled: true
-#  datasource:
-#    url: jdbc:h2:mem:testDB
+  h2:
+    console:
+      enabled: true
   datasource:
-    url: jdbc:h2:tcp://localhost/~/testDB2
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testDB
   jpa:
     hibernate:
-      ddl-auto: update
-#      ddl-auto: create
+#      ddl-auto: update
+      ddl-auto: create
       properties:
         hibernate:
           default_batch_fetch_size: 1000
           open-in-view: false
-          show_sql: true   # System out
-          format_sql: true
-#  mvc.throw-exception-if-no-handler-found: true
-#  web.resources.add-mappings: false
 
 logging:
   level:

@@ -39,9 +39,6 @@ public class ApiExceptionControllerAdvice extends ResponseEntityExceptionHandler
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(CustomResponse.error(CommonExceptionStatus.INTERNAL_SERVER_ERROR.getCode(), e.getMessage()));
-
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                .body(makeErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -50,35 +47,5 @@ public class ApiExceptionControllerAdvice extends ResponseEntityExceptionHandler
 
         return CustomResponse.error(CommonExceptionStatus.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
     }
-
-//    private ErrorResponse makeErrorResponse(ErrorCode errorCode, String message) {
-//        return ErrorResponse.builder()
-//                .code(errorCode.name())
-//                .message(message)
-//                .build();
-//    }
-
-
-//    private ResponseEntity<ErrorResponse> handleExceptionInternal(ErrorCode errorCode) {
-//        return ResponseEntity.status(errorCode.getHttpStatus())
-//                .body(makeErrorResponse(errorCode));
-//    }
-//
-//    private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
-//        return ErrorResponse.builder()
-//                .code(errorCode.name())
-//                .message(errorCode.getMessage())
-//                .build();
-//    }
-//
-//    private ResponseEntity<ErrorResponse> handleExceptionInternal(ErrorCode errorCode, String message) {
-//        return ResponseEntity.status(errorCode.getHttpStatus())
-//                .body(makeErrorResponse(errorCode, message));
-//    }
-
-//    private ResponseEntity<ErrorResponse> handleExceptionInternal(MethodArgumentNotValidException e, ErrorCode errorCode) {
-//        return ResponseEntity.status(errorCode.getHttpStatus())
-//                .body(makeErrorResponse(errorCode, e.getMessage()));
-//    }
 
 }

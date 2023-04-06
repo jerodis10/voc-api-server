@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class JpaCompensationRepository implements CompensationRepository {
         Penalty findPenalty = queryFactory
                 .selectFrom(penalty)
                 .join(penalty.voc, voc).on(voc.vocNo.eq(vocNo))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .fetchOne();
 
         findPenalty.changePenalty();

@@ -7,6 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,7 @@ public class JpaVocRepository implements VocRepository{
         Voc findVoc = queryFactory
                 .selectFrom(voc)
                 .where(voc.vocNo.eq(vocNo))
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .fetchOne();
 
         findVoc.changeVoc();

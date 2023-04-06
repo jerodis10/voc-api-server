@@ -8,5 +8,29 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
 }
+
+//buildscript {
+//    ext {
+//        queryDslVersion = "5.0.0"
+//    }
+//}
+//
+//def querydslDir = "$buildDir/generated/querydsl"
+//
+//querydsl {
+//    jpa = true
+//    querydslSourcesDir = querydslDir
+//}
+//sourceSets {
+//    main.java.srcDir querydslDir
+//}
+//compileQuerydsl{
+//    options.annotationProcessorPath = configurations.querydsl
+//}
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//    querydsl.extendsFrom compileClasspath
+//}
